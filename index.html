@@ -10,6 +10,40 @@
             window.open("https://www.linkedin.com/in/akshat-shah-5954a02a6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app");
         }
 
+        const words = ["Developement...", "Designing...."];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentWord = words[wordIndex];
+            const staticText = " Learning Web ";
+
+            let displayText = staticText + currentWord.substring(0, charIndex);
+
+            document.getElementById("typing").innerHTML =
+                staticText + "<span>" + currentWord.substring(0, charIndex) + "</span>";
+
+            if (!isDeleting && charIndex < currentWord.length) {
+                charIndex++;
+                setTimeout(typeEffect, 100);
+            }
+            else if (isDeleting && charIndex > 0) {
+                charIndex--;
+                setTimeout(typeEffect, 50);
+            }
+            else {
+                isDeleting = !isDeleting;
+
+                if (!isDeleting) {
+                    wordIndex = (wordIndex + 1) % words.length;
+                }
+
+                setTimeout(typeEffect, 800);
+            }
+        }
+
+        window.onload = typeEffect;
     </script>
     <style>
         body {
@@ -79,6 +113,7 @@
             box-shadow: 0 0 10px #222;
             margin: 20px;
             padding: 10px;
+            margin-bottom: 25px;
 
         }
 
@@ -101,13 +136,90 @@
             margin-top: 15px;
             color: whitesmoke;
         }
+
+        #typing span {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        #typing::after {
+            content: "|";
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .skill {
+            background: #4da3ff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin: 5px;
+            display: inline-block;
+            font-size: 12px;
+            margin-left: 20px;
+            margin-bottom: 45px;
+            margin-top: -10px;
+        }
+
+        /* Chat Section */
+        .chatbot {
+            width: 90%;
+            max-width: 600px;
+            height: 450px;
+            margin: 30px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* iframe full fit */
+        .chatbot iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* heading center */
+        .section-title {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .chatbot {
+                height: 350px;
+                width: 95%;
+                margin-bottom: 55px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <h2>Hello I'm Akshat👋</h2>
     <p>Aspiring Computer Engineer...</p>
-    <p>Learning Web Development...</p>
+    <p id="typing"></p>
     <img src="me.jpg.png" class="profile-img">
     <button onclick="func()">My LinkedIn Profile</button>
     <button onclick="my_function()">View Project</button>
@@ -125,10 +237,23 @@
     </div>
 
     <h2 style="padding: 20px;margin-top: -10px;">Skills :</h2>
-    <p style="padding: 20px;margin-top: -30px;">C | Python | HTML | CSS | JavaScript | C++ | Communication Skills
-    </p>
+    <div class="skills">
+        <span class="skill">C</span>
+        <span class="skill">Python</span>
+        <span class="skill">HTML5</span>
+        <span class="skill">CSS</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">C++</span>
+    </div>
+    <h3 class="section-title">Chat with My Chatbot</h3>
+    <div class="chatbot">
+        <iframe src="https://akshat4610.github.io/Chatbot/"></iframe>
+    </div>
 
-    <h3>Contact Me</h3>
+
+    <h3 style="margin-left: 170px;">You can also visit:</h3>
+    <a href="https://instagram.com/akshat_shah_15/" target="_blank"><img src="instagram.jpeg" alt="Instagram"
+            style="width: 30px; height: 30px; margin-right: 10px; margin-left:150px; border-radius: 20px;"></a>
 </body>
 
 </html>
